@@ -144,9 +144,9 @@ fastify.post("/api/auth/log_in", async (request, reply) => {
     )
     return reply.setCookie('tensor-token', token, {
         path: "/",
-        httpOnly: true,
+        httpOnly: false, //in production set "true"
         secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        sameSite: "none", //in production set "lax"
         maxAge: 30 * 24 * 60 * 60,
         signed: true,
     }).code(200).send({
